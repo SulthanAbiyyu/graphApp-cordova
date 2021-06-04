@@ -1,0 +1,46 @@
+.navbar {
+  border-radius: 0px 0px 20px 20px;
+  box-shadow: 6px 6px 12px #dedede, -6px -6px 12px #ffffff;
+}
+.navbar-brand {
+  font-family: "Faster One", cursive;
+  font-size: 40px !important;
+}
+hr {
+  background-color: black !important;
+  width: 300px !important;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  width: 300px !important;
+  outline: none;
+  border: none;
+  color: black !important;
+  z-index: 2;
+}
+
+.btn {
+  width: 30% !important;
+}
+#plot {
+  width: 350px;
+  color: black !important;
+
+  margin-left: 10px;
+  z-index: 1;
+}
+.modebar-group {
+  margin-left: -3000px !important;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+}

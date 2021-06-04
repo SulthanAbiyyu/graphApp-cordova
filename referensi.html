@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph</title>
+    <!-- <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script> -->
+    <script src="https://unpkg.com/mathjs@9.4.1/lib/browser/math.js"></script>
+    <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
+    <style>
+      input[type="text"] {
+        width: 300px;
+      }
+      input {
+        padding: 6px;
+      }
+      body,
+      html,
+      input {
+        font-family: sans-serif;
+        font-size: 11pt;
+      }
+      form {
+        margin: 20px 0;
+      }
+      #plot {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+      <label for="eq">Enter an equation:</label>
+      <input type="text" id="eq" />
+      <input type="submit" value="Draw" />
+    </form>
+
+    <div id="plot"></div>
+
+    <script>
+      function draw() {
+        try {
+          // compile the expression once
+          const expression = document.getElementById("eq").value;
+          const expr = math.compile(expression);
+
+          // evaluate the expression repeatedly for different values of x
+          const xValues = math.range(-10, 10, 0.5).toArray();
+          const yValues = xValues.map(function (x) {
+            return expr.evaluate({ x: x });
+          });
+
+          // render the plot using plotly
+          const trace1 = {
+            x: xValues,
+            y: yValues,
+            type: "scatter",
+          };
+          const data = [trace1];
+          Plotly.newPlot("plot", data);
+        } catch (err) {
+          console.error(err);
+          alert(err);
+        }
+      }
+
+      document.getElementById("form").onsubmit = function (event) {
+        event.preventDefault();
+        draw();
+      };
+
+      draw();
+    </script>
+    <!-- <div id="calculator" style="width: 600px; height: 400px"></div>
+    <script>
+      var elt = document.getElementById("calculator");
+      var calculator = Desmos.GraphingCalculator(elt);
+      calculator.setExpression({ id: "graph1", latex: "y=x^3" });
+    </script> -->
+  </body>
+</html>
